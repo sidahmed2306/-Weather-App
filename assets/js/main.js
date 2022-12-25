@@ -54,26 +54,11 @@ let wochenTag = [
 let dat = new Date();
 setInterval(() => {
   let date = new Date();
-  let stunden = date.getHours();
-  let minuten = date.getMinutes();
-  let sekunden = date.getSeconds();
+  let stunden = date.getHours().toString().padStart(2, `0`);
+  let minuten = date.getMinutes().toString().padStart(2, `0`);
+  let sekunden = date.getSeconds().toString().padStart(2, `0`);
 
   time.innerHTML = `${stunden}:${minuten}:${sekunden}`;
-  /* -------------------------------------------------------------------------- */
-  /*                                   add zro                                  */
-  /* -------------------------------------------------------------------------- */
-  if (stunden < 10) {
-    hours.innerHTML = `0${stunden}`;
-    time.innerHTML = `${stunden}:${minuten}:${sekunden}`;
-  }
-  if (minuten < 10) {
-    minuten.innerHTML = `0${minuten}`;
-    time.innerHTML = `${stunden}:${minuten}:${sekunden}`;
-  }
-  if (sekunden < 10) {
-    seconds.innerHTML = `0${sekunden}`;
-    time.innerHTML = `${stunden}:${minuten}:${sekunden}`;
-  }
 });
 let days = wochenTag[dat.getDay()];
 let monat = monate[dat.getMonth()].substring(0, 3);
@@ -106,6 +91,8 @@ let wether = {
       .then((locat) => {
         let lat = locat[0].lat;
         let lon = locat[0].lon;
+        console.log(lat);
+        console.log(lon);
         fetch(
           `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${wether.apiKey}&units=metric`
         )
@@ -150,10 +137,8 @@ let wether = {
       wetterApp.style.backgroundImage = "url('../../assets/img/1462183.webp')";
     } else if (descrip == "Clear") {
       descriptions.innerHTML = `Sunny`;
-      divLinks.style.backgroundImage =
-        "url('../../assets/img/64921006_382225799083328_704974098331193300_n.jpeg')";
-      wetterApp.style.backgroundImage =
-        "url('../../assets/img/64921006_382225799083328_704974098331193300_n.jpeg')";
+      divLinks.style.backgroundImage = "url('../../assets/img/3265126.jpeg')";
+      wetterApp.style.backgroundImage = "url('../../assets/img/3265126.jpeg')";
     }
     let visb = data.list[0].visibility / 1000;
     console.log(visb);
